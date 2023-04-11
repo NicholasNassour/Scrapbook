@@ -1,0 +1,5 @@
+1. Store login token/info after initially logging in 
+2. Do some research on what page templates to use
+3. Create widgets in separate files and successfully import them into new files
+4. Store a user's past locations and identify the states they were in,
+then create a list to see which states they've visted
