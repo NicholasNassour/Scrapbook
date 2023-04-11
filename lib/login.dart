@@ -27,7 +27,8 @@ class Login extends StatelessWidget {
           // logo
           Column(
             children: [
-              Image.asset('assets/images/dollt.png', height: 200, width: 200),
+              Image.asset('assets/images/scrapbook.png',
+                  height: 200, width: 200),
               SizedBox(height: 50),
               Text(
                 'Welcome back!',
