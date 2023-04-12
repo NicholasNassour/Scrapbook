@@ -174,3 +174,142 @@ class _HomeState1 extends State<Home1> {
     );
   }
 }
+
+
+/*
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final Completer<GoogleMapController> _controller = Completer();
+
+  static const LatLng sourceLocation = LatLng(37.4221, -122.0841);
+  static const LatLng destination = LatLng(37.4116, -122.0713);
+
+  List<LatLng> polylineCoordinates = [];
+
+  LocationData? currentLocation;
+
+  void getCurrentLocation() async {
+    Location location = Location();
+
+    location.getLocation().then(
+      (location) {
+        currentLocation = location;
+      },
+    );
+
+    if (currentLocation != null) {
+      currentLocation = currentLocation;
+    }
+
+    GoogleMapController googleMapController = await _controller.future;
+
+    location.onLocationChanged.listen(
+      (newLoc) {
+        currentLocation = newLoc;
+
+        googleMapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              zoom: 13.5,
+              target: LatLng(newLoc.latitude!, newLoc.longitude!),
+            ),
+          ),
+        );
+
+        setState(() {});
+      },
+    );
+  }
+
+  void getPolyPoints() async {
+    PolylinePoints polylinePoints = PolylinePoints();
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      google_api_key,
+      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+      PointLatLng(destination.latitude, destination.longitude),
+    );
+
+    if (result.points.isNotEmpty) {
+      result.points.forEach(
+        (PointLatLng point) => polylineCoordinates.add(
+          LatLng(point.latitude, point.longitude),
+        ),
+      );
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    getCurrentLocation();
+    getPolyPoints();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width * 0.98;
+    final height = screenSize.height * .25;
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: width,
+              height: height,
+              child: currentLocation == null
+                  ? const Center(child: Text("Loading"))
+                  : GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                          target: LatLng(currentLocation!.latitude!,
+                              currentLocation!.longitude!),
+                          zoom: 14.5),
+                      polylines: {
+                        Polyline(
+                          polylineId: PolylineId("route"),
+                          points: polylineCoordinates,
+                          color: Colors.lightBlue,
+                          width: 5,
+                        ),
+                      },
+                      markers: {
+                        const Marker(
+                          markerId: MarkerId("source"),
+                          position: sourceLocation,
+                        ),
+                        Marker(
+                          markerId: const MarkerId("current"),
+                          position: LatLng(currentLocation!.latitude!,
+                              currentLocation!.longitude!),
+                        ),
+                        const Marker(
+                          markerId: MarkerId("destination"),
+                          position: destination,
+                        ),
+                      },
+                      onMapCreated: (mapController) {
+                        _controller.complete(mapController);
+                      },
+                    ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Latitude: ${currentLocation?.latitude}\nLongitude: ${currentLocation?.longitude}',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/

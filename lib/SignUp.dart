@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/authentication.dart';
-import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/newPage.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -266,7 +266,7 @@ class _SignupFormState extends State<SignupForm> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Home()));
+                                    builder: (context) => NewPage()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(

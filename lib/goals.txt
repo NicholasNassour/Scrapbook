@@ -3,3 +3,5 @@
 3. Create widgets in separate files and successfully import them into new files
 4. Store a user's past locations and identify the states they were in,
 then create a list to see which states they've visted
+
+# Find a way to set the location as the app is launching so it doesn't get stuck at 0.0/0.0

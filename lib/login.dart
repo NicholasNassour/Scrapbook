@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/SignUp.dart';
 import 'package:flutter_application_1/newPage.dart';
+import 'package:flutter_application_1/src/navpages/main_page.dart';
 import 'home.dart';
 import 'package:flutter/services.dart';
 import 'dart:core';
@@ -181,7 +182,7 @@ class _LoginFormState extends State<LoginForm> {
                     if (result == null) {
                       //await storage.write(key: "token", value: output["token"]);
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => NewPage()));
+                          MaterialPageRoute(builder: (context) => MainPage()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
