@@ -3,7 +3,6 @@ import 'package:flutter_application_1/src/navpages/global_page.dart';
 import 'package:flutter_application_1/src/navpages/home_page.dart';
 import 'package:flutter_application_1/src/navpages/profile_page.dart';
 import 'package:flutter_application_1/src/navpages/search_page.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,11 +12,11 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List pages = [Home(), SearchPage(), ProfilePage(), GlobalPage()];
-  int selectedIndex = 0;
+  int currentIndex = 0;
 
   void onTap(int index) {
     setState(() {
-      selectedIndex = index;
+      currentIndex = index;
     });
   }
 
@@ -25,27 +24,37 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      body: pages[currentIndex],
       appBar: AppBar(
-        title: Text("SCRAP"),
+        title: Text("Scrapbook"),
       ),
-      bottomNavigationBar: Container(
-        child: GNav(
-          onTabChange: onTap,
-          backgroundColor: Colors.black,
-          activeColor: Colors.white,
-          color: Colors.white,
-          tabBackgroundColor: Colors.grey.withOpacity(0.25),
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-          gap: 8,
-          selectedIndex: selectedIndex,
-          tabs: [
-            GButton(icon: Icons.home, text: 'Home'),
-            GButton(icon: Icons.search, text: 'Search'),
-            GButton(icon: Icons.person, text: 'Profile'),
-            GButton(icon: Icons.public, text: 'Global')
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: onTap,
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey.withOpacity(0.5),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: currentIndex,
+        items: const [
+          BottomNavigationBarItem(
+            label: "Home",
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: "Search",
+            icon: Icon(Icons.search),
+          ),
+          BottomNavigationBarItem(
+            label: "Profile",
+            icon: Icon(Icons.person),
+          ),
+          BottomNavigationBarItem(
+            label: "Global",
+            icon: Icon(Icons.public),
+          )
+        ],
       ),
     );
   }
