@@ -47,13 +47,13 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.search),
           ),
           BottomNavigationBarItem(
+            label: "Global",
+            icon: Icon(Icons.public),
+          ),
+          BottomNavigationBarItem(
             label: "Profile",
             icon: Icon(Icons.person),
           ),
-          BottomNavigationBarItem(
-            label: "Global",
-            icon: Icon(Icons.public),
-          )
         ],
       ),
     );
