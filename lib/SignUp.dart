@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/authentication.dart';
 import 'package:flutter_application_1/newPage.dart';
+import 'Profile/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -115,6 +117,27 @@ class _SignupFormState extends State<SignupForm> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               // email
+              space,
+              Container(
+                width: 376,
+                height: 54,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Full name',
+                    prefixIcon: Icon(Icons.account_circle),
+                    border: border,
+                  ),
+                  onSaved: (val) {
+                    name = val;
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter some name';
+                    }
+                    return null;
+                  },
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(top: 10),
                 width: 376,
@@ -204,29 +227,7 @@ class _SignupFormState extends State<SignupForm> {
                   },
                 ),
               ),
-              space,
               // name
-              Container(
-                width: 376,
-                height: 54,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Full name',
-                    prefixIcon: Icon(Icons.account_circle),
-                    border: border,
-                  ),
-                  onSaved: (val) {
-                    name = val;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter some name';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -263,6 +264,7 @@ class _SignupFormState extends State<SignupForm> {
                             .signUp(email: email!, password: password!)
                             .then((result) {
                           if (result == null) {
+                            User newUser = User(name: name!, email: email!);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
