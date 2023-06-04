@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/authentication.dart';
-import 'package:flutter_application_1/newPage.dart';
+import 'package:flutter_application_1/src/navpages/main_page.dart';
 import 'Profile/users.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -265,10 +264,11 @@ class _SignupFormState extends State<SignupForm> {
                             .then((result) {
                           if (result == null) {
                             User newUser = User(name: name!, email: email!);
+                            newUser.createUser("name", "email");
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => NewPage()));
+                                    builder: (context) => MainPage()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(

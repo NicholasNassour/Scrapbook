@@ -1,4 +1,3 @@
-import 'package:flutter_application_1/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
@@ -12,6 +11,7 @@ class User {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     // Create a new user document with the name and email fields
+    print("We actually made it");
     users.add({
       'name': name,
       'email': email,
