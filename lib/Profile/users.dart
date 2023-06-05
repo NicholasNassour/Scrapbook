@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class User {
   String name;
   String email;
+  String uid;
 
-  User({required this.name, required this.email});
+  User({required this.uid, required this.name, required this.email});
 
   void createUser(String? uid, String? name, String? email) {
     // Get a reference to the Firestore collection

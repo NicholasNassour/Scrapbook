@@ -263,9 +263,12 @@ class _SignupFormState extends State<SignupForm> {
                             .signUp(email: email!, password: password!)
                             .then((result) {
                           if (result == null) {
-                            User newUser = User(name: name!, email: email!);
-                            newUser.createUser(
-                                AuthenticationHelper().user.uid, name, email);
+                            //At some point delete the createUser function below so it is instead
+                            //called when the user is created rather than explicitly calling it
+                            String uid = AuthenticationHelper().user.uid;
+                            User newUser =
+                                User(uid: uid, name: name!, email: email!);
+                            newUser.createUser(uid, name, email);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
