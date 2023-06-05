@@ -6,13 +6,13 @@ class User {
 
   User({required this.name, required this.email});
 
-  void createUser(String name, String email) {
+  void createUser(String? uid, String? name, String? email) {
     // Get a reference to the Firestore collection
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     // Create a new user document with the name and email fields
-    print("We actually made it");
     users.add({
+      'uid': uid,
       'name': name,
       'email': email,
     }).then((DocumentReference documentRef) {

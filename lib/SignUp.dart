@@ -264,7 +264,8 @@ class _SignupFormState extends State<SignupForm> {
                             .then((result) {
                           if (result == null) {
                             User newUser = User(name: name!, email: email!);
-                            newUser.createUser("name", "email");
+                            newUser.createUser(
+                                AuthenticationHelper().user.uid, name, email);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
