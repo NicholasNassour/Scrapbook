@@ -7,19 +7,21 @@ class Book {
 
   Book({required this.userUid, this.name, this.badges = const {}});
 
-  void createScrapbook(String? userUid) {
-    CollectionReference Scrapbook =
+  void createScrapbook(String userUid) {
+    CollectionReference scrapbookCollection =
         FirebaseFirestore.instance.collection('Scrapbook');
 
-    Scrapbook.add({
+    DocumentReference scrapbookDocRef = scrapbookCollection.doc(userUid);
+
+    scrapbookDocRef.set({
       'uid': userUid,
-      'name': "",
-      'badges': "",
-    }).then((DocumentReference documentRef) {
-      print('User created with ID: ${documentRef.id}');
+      'name': '',
+      'badges': {},
+    }).then((_) {
+      print('Scrapbook created with ID: $userUid');
       // You can perform further actions here, such as navigation or showing a success message
     }).catchError((error) {
-      print('Failed to create user: $error');
+      print('Failed to create scrapbook: $error');
       // Handle the error appropriately, such as showing an error message to the user
     });
   }

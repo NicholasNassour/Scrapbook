@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Profile/scrapbook.dart';
 
 class User {
   String name;
@@ -7,6 +8,7 @@ class User {
 
   User({required this.uid, required this.name, required this.email});
 
+  // Creating a user profile with a unique UID linked to their email
   void createUser(String? uid, String? name, String? email) {
     // Get a reference to the Firestore collection
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -23,5 +25,8 @@ class User {
       print('Failed to create user: $error');
       // Handle the error appropriately, such as showing an error message to the user
     });
+
+    Book userBook = Book(userUid: uid!);
+    userBook.createScrapbook(uid);
   }
 }
