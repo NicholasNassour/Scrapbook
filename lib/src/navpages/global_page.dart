@@ -19,6 +19,7 @@ class _GlobalPageState extends State<GlobalPage> {
   }
 
   Future<void> updateScrapbookName() async {
+    // Get current User to extract uid for a scrapbook
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
@@ -29,16 +30,11 @@ class _GlobalPageState extends State<GlobalPage> {
       CollectionReference Scrapbook =
           FirebaseFirestore.instance.collection('Scrapbook');
 
-      print('Updating scrapbook name: $scrapbookName for UID: $userUid');
+      // Updating the name of the scrapbook based on the uid
       Scrapbook.doc(userUid).update({'name': scrapbookName});
-      print('Updating scrapbook name: $scrapbookName for UID: $userUid');
     } else {
       print("No user logged in");
     }
-    // Implement your logic to update the scrapbook name
-    // For example, you can use Firebase Firestore or a custom backend API
-
-    // TODO: Update the scrapbook name in the database using the userUid
   }
 
   @override
