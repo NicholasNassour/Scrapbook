@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/SignUp.dart';
 import 'package:flutter_application_1/newPage.dart';
 import 'package:flutter_application_1/src/navpages/main_page.dart';
-import 'home.dart';
 import 'package:flutter/services.dart';
 import 'dart:core';
 import 'package:flutter_application_1/authentication.dart';
