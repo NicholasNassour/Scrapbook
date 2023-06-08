@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/SignUp.dart';
-import 'package:flutter_application_1/newPage.dart';
+// import 'package:flutter_application_1/newPage.dart';
 import 'package:flutter_application_1/src/navpages/main_page.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'dart:core';
 import 'package:flutter_application_1/authentication.dart';
-import "home3.dart";
+// import "home3.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import 'newPage.dart';
+// import 'newPage.dart';
 
 //Create more messages when an email is not found/password is incorrect etc
 
