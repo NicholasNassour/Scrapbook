@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '779783460629',
     projectId: 'scrapbook-4cdbc',
     storageBucket: 'scrapbook-4cdbc.appspot.com',
-    iosClientId: '779783460629-2q4ve3gpadarc0ha6dukdpa8e040c7r9.apps.googleusercontent.com',
+    iosClientId:
+        '779783460629-2q4ve3gpadarc0ha6dukdpa8e040c7r9.apps.googleusercontent.com',
     iosBundleId: 'com.example.testing',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '779783460629',
     projectId: 'scrapbook-4cdbc',
     storageBucket: 'scrapbook-4cdbc.appspot.com',
-    iosClientId: '779783460629-2q4ve3gpadarc0ha6dukdpa8e040c7r9.apps.googleusercontent.com',
+    iosClientId:
+        '779783460629-2q4ve3gpadarc0ha6dukdpa8e040c7r9.apps.googleusercontent.com',
     iosBundleId: 'com.example.testing',
   );
 }

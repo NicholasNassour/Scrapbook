@@ -11,7 +11,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List pages = [Home(), SearchPage(), ProfilePage(), GlobalPage()];
+  List pages = [
+    const Home(),
+    const SearchPage(),
+    ProfilePage(),
+    const GlobalPage()
+  ];
   int currentIndex = 0;
 
   void onTap(int index) {
@@ -26,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: pages[currentIndex],
       appBar: AppBar(
-        title: Text("Scrapbook"),
+        title: const Text("Scrapbook"),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -27,7 +27,7 @@ class MapWidget extends StatelessWidget {
         ),
         polylines: {
           Polyline(
-            polylineId: PolylineId("route"),
+            polylineId: const PolylineId("route"),
             points: polylineCoordinates,
             color: Colors.lightBlue,
             width: 5,
