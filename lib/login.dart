@@ -179,6 +179,7 @@ class _LoginFormState extends State<LoginForm> {
                       .signIn(email: email!, password: password!)
                       .then((result) {
                     if (result == null) {
+                      // Below is the code for logging in with a token
                       //await storage.write(key: "token", value: output["token"]);
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => MainPage()));
