@@ -161,7 +161,7 @@ class _HomeState1 extends State<Home1> {
                       height: 10,
                       child: CircularProgressIndicator()),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Latitude: ${double.parse(lat)}\nLongitude: ${double.parse(long)}',
               style: const TextStyle(fontSize: 16),

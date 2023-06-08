@@ -63,7 +63,7 @@ class Login extends StatelessWidget {
                 onTap: () {
                   // Navigator.pushNamed(context, '/signup');
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Signup()));
+                      MaterialPageRoute(builder: (context) => const Signup()));
                 },
               )
             ],
