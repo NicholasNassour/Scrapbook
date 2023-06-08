@@ -40,27 +40,39 @@ class _GlobalPageState extends State<GlobalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Global Page"),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                controller: _scrapbookNameController,
-                decoration: InputDecoration(
-                  hintText: 'Enter scrapbook name',
-                ),
+      body: RefreshIndicator(
+        onRefresh: () {
+          print("here");
+          updateScrapbookName();
+          return Future.delayed(Duration(seconds: 1));
+        },
+        child: Expanded(
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Global Page"),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: TextField(
+                      controller: _scrapbookNameController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter scrapbook name',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: updateScrapbookName,
+                    child: Text('Create Scrapbook'),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: updateScrapbookName,
-              child: Text('Create Scrapbook'),
-            ),
-          ],
+          ),
         ),
       ),
     );
