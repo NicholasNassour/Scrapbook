@@ -14,7 +14,6 @@ class Book {
     DocumentReference scrapbookDocRef = scrapbookCollection.doc(userUid);
 
     scrapbookDocRef.set({
-      'uid': userUid,
       'name': '',
       'badges': {},
     }).then((_) {
