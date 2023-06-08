@@ -17,44 +17,46 @@ import "package:flutter_secure_storage/flutter_secure_storage.dart";
 
 //Create a goal page in mind to stop getting sidetracked on different projects
 class Login extends StatelessWidget {
+  const Login({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         children: <Widget>[
-          SizedBox(height: 80),
+          const SizedBox(height: 80),
           // logo
           Column(
             children: [
               Image.asset('assets/images/scrapbook.png',
                   height: 200, width: 200),
-              SizedBox(height: 50),
-              Text(
+              const SizedBox(height: 50),
+              const Text(
                 'Welcome back!',
                 style: TextStyle(fontSize: 24),
               ),
             ],
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: LoginForm(),
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           Row(
             children: <Widget>[
-              SizedBox(width: 30),
-              Text('New here? ',
+              const SizedBox(width: 30),
+              const Text('New here? ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               InkWell(
-                child: Text('Create account',
+                child: const Text('Create account',
                     style: TextStyle(
                         fontSize: 20,
                         color: Color.fromARGB(255, 32, 155, 255))),
@@ -73,7 +75,7 @@ class Login extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  LoginForm({Key? key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -81,7 +83,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   String? email;
   String? password;
@@ -96,17 +98,17 @@ class _LoginFormState extends State<LoginForm> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           // email
-          Container(
+          SizedBox(
             width: 376,
             height: 54,
             child: TextFormField(
               // initialValue: 'Input text',
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email_outlined),
                 labelText: 'Email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
-                    const Radius.circular(10),
+                    Radius.circular(10),
                   ),
                 ),
               ),
@@ -121,22 +123,22 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
 
           // password
-          Container(
+          SizedBox(
             width: 376,
             height: 54,
             child: TextFormField(
               // initialValue: 'Input text',
               decoration: InputDecoration(
                 labelText: 'Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(
+                prefixIcon: const Icon(Icons.lock_outline),
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
-                    const Radius.circular(10),
+                    Radius.circular(10),
                   ),
                 ),
                 suffixIcon: IconButton(
@@ -163,7 +165,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
 
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
 
           SizedBox(
             height: 54,
@@ -181,13 +183,15 @@ class _LoginFormState extends State<LoginForm> {
                     if (result == null) {
                       // Below is the code for logging in with a token
                       //await storage.write(key: "token", value: output["token"]);
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
                           result,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ));
                     }
@@ -195,10 +199,10 @@ class _LoginFormState extends State<LoginForm> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 23, 103, 168),
-                  shape: RoundedRectangleBorder(
+                  backgroundColor: const Color.fromARGB(255, 23, 103, 168),
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
-              child: Text(
+              child: const Text(
                 'Login',
                 style: TextStyle(fontSize: 24),
               ),

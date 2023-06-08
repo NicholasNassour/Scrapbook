@@ -6,7 +6,7 @@ import 'login.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
         apiKey: "AIzaSyBsmTHR7JJry8x0jYgD0u8_xTjeDDiTEX4",
         authDomain: "scrapbook-4cdbc.firebaseapp.com",
         projectId: "scrapbook-4cdbc",
@@ -15,7 +15,7 @@ Future<void> main() async {
         appId: "1:779783460629:web:ea702cf226f735d5d43b1c",
         measurementId: "G-677L8N9TZ6"),
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter auth Demo',
       home: Login(),
     );

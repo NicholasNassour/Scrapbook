@@ -92,11 +92,11 @@ class _HomeState1 extends State<Home1> {
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) => polylineCoordinates.add(
+      for (var point in result.points) {
+        polylineCoordinates.add(
           LatLng(point.latitude, point.longitude),
-        ),
-      );
+        );
+      }
       setState(() {});
     }
   }
@@ -131,7 +131,7 @@ class _HomeState1 extends State<Home1> {
                           zoom: 14.5),
                       polylines: {
                         Polyline(
-                          polylineId: PolylineId("route"),
+                          polylineId: const PolylineId("route"),
                           points: polylineCoordinates,
                           color: Colors.lightBlue,
                           width: 5,
@@ -156,7 +156,7 @@ class _HomeState1 extends State<Home1> {
                         _controller.complete(mapController);
                       },
                     )
-                  : SizedBox(
+                  : const SizedBox(
                       width: 10,
                       height: 10,
                       child: CircularProgressIndicator()),
@@ -164,7 +164,7 @@ class _HomeState1 extends State<Home1> {
             SizedBox(height: 16),
             Text(
               'Latitude: ${double.parse(lat)}\nLongitude: ${double.parse(long)}',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ],

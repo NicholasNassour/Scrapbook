@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 // import 'constants.dart';
 import 'home3.dart';
 
-class NewPage extends StatefulWidget {
-  const NewPage({Key? key}) : super(key: key);
+class New_Page extends StatefulWidget {
+  const New_Page({Key? key}) : super(key: key);
   @override
   NewPageState createState() => NewPageState();
 }
 
-class NewPageState extends State<NewPage> {
+class NewPageState extends State<New_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Page'),
+        title: const Text('New Page'),
       ),
-      body: Home1(),
+      body: const Home1(),
     );
   }
 }

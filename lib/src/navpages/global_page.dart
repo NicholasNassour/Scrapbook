@@ -44,30 +44,30 @@ class _GlobalPageState extends State<GlobalPage> {
         onRefresh: () {
           print("here");
           updateScrapbookName();
-          return Future.delayed(Duration(seconds: 1));
+          return Future.delayed(const Duration(seconds: 1));
         },
         child: Expanded(
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Global Page"),
-                  SizedBox(height: 20),
+                  const Text("Global Page"),
+                  const SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: TextField(
                       controller: _scrapbookNameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Enter scrapbook name',
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: updateScrapbookName,
-                    child: Text('Create Scrapbook'),
+                    child: const Text('Create Scrapbook'),
                   ),
                 ],
               ),
