@@ -18,6 +18,7 @@ class User {
       'uid': uid,
       'name': name,
       'email': email,
+      'prevLocations': [],
     }).then((DocumentReference documentRef) {
       print('User created with ID: ${documentRef.id}');
       // You can perform further actions here, such as navigation or showing a success message
