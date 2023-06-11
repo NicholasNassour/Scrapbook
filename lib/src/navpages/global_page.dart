@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../login.dart';
 
 class GlobalPage extends StatefulWidget {
   const GlobalPage({Key? key}) : super(key: key);
@@ -37,6 +38,13 @@ class _GlobalPageState extends State<GlobalPage> {
     }
   }
 
+  signOut() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Login()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +76,10 @@ class _GlobalPageState extends State<GlobalPage> {
                   ElevatedButton(
                     onPressed: updateScrapbookName,
                     child: const Text('Create Scrapbook'),
+                  ),
+                  ElevatedButton(
+                    onPressed: signOut,
+                    child: const Text('Sign Out'),
                   ),
                 ],
               ),
