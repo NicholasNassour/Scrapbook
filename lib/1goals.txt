@@ -10,5 +10,23 @@ then create a list to see which states they've visted
 ## Creating Profiles
 1. Created a Profile with users
 2. Initialize a Scrapbook object when a User is created
-3. The Scrapbook object should have a hashmap of Badges
-4. 
+3. The Scrapbook object should have a hashmap/list of Badges
+
+## Storing a login token so users don't need to keep signing in
+1. Create a sign out option to test later requirements
+2. Create a way to detect if a user has opted to stay signed in on their device
+after opting in
+3. Add a sign out button on global_page in case a user wants to sign out of their account
+
+
+
+
+
+Questions??
+- If I have already preset badges (states, countries, continents) how would I
+add it to a user's profile when it has been obtained? Do I create all the preset
+badges and then set its boolean value to true when it's unlocked or do I wait until 
+a badge is unlocked to create the badge object?
+- What are same ways to add error handling when the app crashes? Should there be an
+option which just refreshes the entire app or should the app just close on its own?
+- 
