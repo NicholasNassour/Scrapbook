@@ -59,24 +59,7 @@ class _MyAppState extends State<MyApp> {
         MainPage.id: (context) => MainPage(),
         Login.id: (context) => Login(),
       },
-      home: MainPage(),
+      home: Login(),
     );
   }
 }
-
-
-
-
-
-// class MyApp extends StatefulWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       title: 'Flutter auth Demo',
-//       home: Login(),
-//     );
-//   }
-// }
