@@ -5,6 +5,7 @@ import 'package:flutter_application_1/src/navpages/profile_page.dart';
 import 'package:flutter_application_1/src/navpages/search_page.dart';
 
 class MainPage extends StatefulWidget {
+  static String id = '3';
   const MainPage({Key? key}) : super(key: key);
   @override
   _MainPageState createState() => _MainPageState();
@@ -14,8 +15,8 @@ class _MainPageState extends State<MainPage> {
   List pages = [
     const Home(),
     const SearchPage(),
+    const GlobalPage(),
     ProfilePage(),
-    const GlobalPage()
   ];
   int currentIndex = 0;
 
