@@ -14,9 +14,11 @@ then create a list to see which states they've visted
 
 ## Storing a login token so users don't need to keep signing in
 1. Create a sign out option to test later requirements
-2. Create a way to detect if a user has opted to stay signed in on their device
-after opting in
-3. Add a sign out button on global_page in case a user wants to sign out of their account
+2. Develop a mechanism to enable automatic sign-in functionality if a user opts in
+3. Save a token to the user's device that lets them skip the sign in page and takes them to the
+home page right away.
+4. If the user signs out the token is deleted and they will be asked to enter their login credentials again
+4. Implement email verification using Firebase to ensure that only valid and authorized emails can be used
 
 
 
