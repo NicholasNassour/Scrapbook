@@ -40,8 +40,8 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey.withOpacity(0.5),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
@@ -49,8 +49,8 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            label: "Search",
-            icon: Icon(Icons.search),
+            label: "Scrapbook",
+            icon: Icon(Icons.book_sharp),
           ),
           BottomNavigationBarItem(
             label: "Global",
