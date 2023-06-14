@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Create a goal page in mind to stop getting sidetracked on different projects
 class Login extends StatelessWidget {
+  static String id = '1';
   const Login({super.key});
 
   @override
@@ -81,12 +82,74 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final storage = const FlutterSecureStorage();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   String? email;
   String? password;
+  late Future<String> _x;
+  late Future<int> _counter;
 
   bool _obscureText = true;
   bool _isChecked = false;
+
+  // _onFormSubmit saves data after the app is closed
+  // _onFormSubmit(String email) async {
+  //   final SharedPreferences prefs = await _prefs;
+  //   final int counter = (prefs.getInt('counter') ?? 0) + 1;
+  //   final String x = (prefs.getString('KEY_USERNAME') ?? '');
+
+  //   setState(() {
+  //     _x = prefs.setString("KEY_USERNAME", email).then((bool success) {
+  //       return x;
+  //     });
+  //     _counter = prefs.setInt('counter', counter).then((bool success) {
+  //       return counter;
+  //     });
+  //   });
+  // }
+
+  _signIn() async {
+    AuthenticationHelper()
+        .signIn(email: email!, password: password!)
+        .then((result) {
+      if (result == null) {
+        // if (_isChecked) {
+        //   _onFormSubmit(email!);
+        // }
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const MainPage()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            result,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ));
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Checking if x/counter values are saved after restarting
+    // _x = _prefs.then((SharedPreferences prefs) {
+    //   return prefs.getString('KEY_USERNAME') ?? '';
+    // });
+
+    // _x.then((String value) {
+    //   print("the email is: $value");
+    // });
+
+    // _counter = _prefs.then((SharedPreferences prefs) {
+    //   return prefs.getInt('counter') ?? 0;
+    // });
+
+    // _counter.then((int value) {
+    //   print("the counter is at: $value");
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +158,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          // email
+          // email text field
           SizedBox(
             width: 376,
             height: 54,
@@ -125,7 +188,7 @@ class _LoginFormState extends State<LoginForm> {
             height: 20,
           ),
 
-          // password
+          // password text field
           SizedBox(
             width: 376,
             height: 54,
@@ -186,7 +249,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
 
           const SizedBox(height: 10),
-
+          // Login button
           SizedBox(
             height: 54,
             width: 184,
@@ -194,7 +257,7 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  // _signIn();
+                  _signIn();
                 }
               },
               style: ElevatedButton.styleFrom(
