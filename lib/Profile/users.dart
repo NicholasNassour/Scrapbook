@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/Profile/scrapbook.dart';
 
-class User {
+class Profile {
   String name;
   String email;
   String uid;
 
-  User({required this.uid, required this.name, required this.email});
+  Profile({required this.uid, required this.name, required this.email});
 
   // Creating a user profile with a unique UID linked to their email
   void createUser(String? uid, String? name, String? email) {

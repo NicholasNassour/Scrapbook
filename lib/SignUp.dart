@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/authentication.dart';
-import 'package:flutter_application_1/src/navpages/main_page.dart';
+import 'authentication.dart';
+import 'src/navpages/main_page.dart';
 import 'Profile/users.dart';
 
 class Signup extends StatelessWidget {
@@ -268,8 +268,8 @@ class _SignupFormState extends State<SignupForm> {
                             //At some point delete the createUser function below so it is instead
                             //called when the user is created rather than explicitly calling it
                             String uid = AuthenticationHelper().user.uid;
-                            User newUser =
-                                User(uid: uid, name: name!, email: email!);
+                            Profile newUser =
+                                Profile(uid: uid, name: name!, email: email!);
                             newUser.createUser(uid, name, email);
                             Navigator.pushReplacement(
                                 context,
