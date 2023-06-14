@@ -4,7 +4,7 @@ import 'package:flutter_application_1/src/navpages/main_page.dart';
 import 'dart:core';
 import 'package:flutter_application_1/authentication.dart';
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 //Create more messages when an email is not found/password is incorrect etc
 
@@ -82,12 +82,12 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final storage = const FlutterSecureStorage();
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   String? email;
   String? password;
-  late Future<String> _x;
-  late Future<int> _counter;
+  // late Future<String> _x;
+  // late Future<int> _counter;
 
   bool _obscureText = true;
   bool _isChecked = false;
