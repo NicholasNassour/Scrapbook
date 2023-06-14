@@ -1,3 +1,8 @@
+KEY:
+## Represents the task(s) to be completed
+** Represents the methods to complete the tasks above
+(This is for all code below the horizontal segment)
+ 
 ## To do later after creating User/Scrapbook/Badges
 1. Store login token/info after initially logging in 
 2. Do some research on what page templates to use
@@ -12,6 +17,8 @@ then create a list to see which states they've visted
 2. Initialize a Scrapbook object when a User is created
 3. The Scrapbook object should have a hashmap/list of Badges
 
+__________________________________________________________________________________________
+
 ## Storing a login token so users don't need to keep signing in
 1. Create a sign out option to test later requirements
 2. Develop a mechanism to enable automatic sign-in functionality if a user opts in
@@ -20,7 +27,10 @@ home page right away.
 4. If the user signs out the token is deleted and they will be asked to enter their login credentials again
 5. Implement email verification using Firebase to ensure that only valid and authorized emails can be used
 
-
+** Storing a login token so users don't need to keep signing in
+1. Created a temporary sign out button in global_page.dart to sign the user out using FirebaseAuth
+2. Added a checkbox in the login page to keep the user signed in if they so chose. If the checkbox was checked,
+the key "Check" in shared_preferences will be used to determine if a a user will stay logged in.
 
 
 
