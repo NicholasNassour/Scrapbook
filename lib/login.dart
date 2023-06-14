@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/SignUp.dart';
-// import 'package:flutter_application_1/newPage.dart';
 import 'package:flutter_application_1/src/navpages/main_page.dart';
-// import 'package:flutter/services.dart';
 import 'dart:core';
 import 'package:flutter_application_1/authentication.dart';
-// import "home3.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-// import 'newPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Create more messages when an email is not found/password is incorrect etc
 
@@ -89,6 +86,7 @@ class _LoginFormState extends State<LoginForm> {
   String? password;
 
   bool _obscureText = true;
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -165,37 +163,38 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
 
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
+
+          // Stay signed in Checkbox
+          Row(
+            children: [
+              Checkbox(
+                value: _isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isChecked = value!;
+                  });
+                },
+              ),
+              const Flexible(
+                child: Text(
+                  'Stay signed in?',
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 10),
 
           SizedBox(
             height: 54,
             width: 184,
             child: ElevatedButton(
               onPressed: () {
-                // Respond to button press
-
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-
-                  AuthenticationHelper()
-                      .signIn(email: email!, password: password!)
-                      .then((result) {
-                    if (result == null) {
-                      // Below is the code for logging in with a token
-                      //await storage.write(key: "token", value: output["token"]);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainPage()));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                          result,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ));
-                    }
-                  });
+                  // _signIn();
                 }
               },
               style: ElevatedButton.styleFrom(
