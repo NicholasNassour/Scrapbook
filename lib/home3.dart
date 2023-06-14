@@ -4,8 +4,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home1 extends StatefulWidget {
+  static String id = '2';
   const Home1({Key? key}) : super(key: key);
   @override
   _HomeState1 createState() => _HomeState1();
@@ -52,6 +55,9 @@ class _HomeState1 extends State<Home1> {
   }
 
   void liveLocation() async {
+    User? curr = FirebaseAuth.instance.currentUser;
+    CollectionReference user = FirebaseFirestore.instance.collection('users');
+
     LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.high, distanceFilter: 20);
 
@@ -73,6 +79,14 @@ class _HomeState1 extends State<Home1> {
 
       setState(() {});
     });
+    // print("here");
+    // if (curr != null) {
+    //   print("working");
+    //   user.doc(curr.uid).update({
+    //     'prevLocations': FieldValue.arrayUnion([(lat, long)])
+    //   });
+    // }
+    // print("didn't crash");
   }
 
   final Completer<GoogleMapController> _controller = Completer();
