@@ -50,7 +50,6 @@ class _GlobalPageState extends State<GlobalPage> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () {
-          print("here");
           updateScrapbookName();
           return Future.delayed(const Duration(seconds: 1));
         },
