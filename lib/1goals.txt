@@ -18,7 +18,7 @@ then create a list to see which states they've visted
 3. Save a token to the user's device that lets them skip the sign in page and takes them to the
 home page right away.
 4. If the user signs out the token is deleted and they will be asked to enter their login credentials again
-4. Implement email verification using Firebase to ensure that only valid and authorized emails can be used
+5. Implement email verification using Firebase to ensure that only valid and authorized emails can be used
 
 
 
