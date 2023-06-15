@@ -55,7 +55,7 @@ class _HomeState1 extends State<Home1> {
   }
 
   void liveLocation() async {
-    User? curr = FirebaseAuth.instance.currentUser;
+    User? curr = auth.currentUser;
     CollectionReference user = FirebaseFirestore.instance.collection('users');
 
     LocationSettings locationSettings = const LocationSettings(
@@ -79,14 +79,14 @@ class _HomeState1 extends State<Home1> {
 
       setState(() {});
     });
-    print("here");
-    if (curr != null) {
-      print("working");
-      user.doc(curr.uid).update({
-        'prevLocations': FieldValue.arrayUnion([(lat, long)])
-      });
-    }
-    print("didn't crash");
+    // print("here");
+    // if (curr != null) {
+    //   print("working");
+    //   user.doc(curr.uid).update({
+    //     'prevLocations': FieldValue.arrayUnion([(lat, long)])
+    //   });
+    // }
+    // print("didn't crash");
   }
 
   final Completer<GoogleMapController> _controller = Completer();

@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'constants.dart';
 
 class AuthenticationHelper {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  get user => _auth.currentUser;
+  get user => auth.currentUser;
 
   //SIGN UP METHOD
   Future signUp({required String email, required String password}) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -20,7 +20,7 @@ class AuthenticationHelper {
   //SIGN IN METHOD
   Future signIn({required String email, required String password}) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await auth.signInWithEmailAndPassword(email: email, password: password);
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -29,7 +29,7 @@ class AuthenticationHelper {
 
   //SIGN OUT METHOD
   Future signOut() async {
-    await _auth.signOut();
+    await auth.signOut();
 
     print('signout');
   }

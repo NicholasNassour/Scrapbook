@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/src/navpages/main_page.dart';
-import 'login.dart';
+import 'LoggingIn/login.dart';
 import 'dart:async';
+import 'constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
   late StreamSubscription<User?> user;
   void initState() {
     super.initState();
-    user = FirebaseAuth.instance.authStateChanges().listen((user) {
+    user = auth.authStateChanges().listen((user) {
       if (user == null) {
         print('User is currently signed out!');
       } else {
@@ -51,8 +52,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       /// check if user is signed (Open Chat page) if user is not signed in (open Login page)
-      initialRoute:
-          FirebaseAuth.instance.currentUser == null ? Login.id : MainPage.id,
+      initialRoute: auth.currentUser == null ? Login.id : MainPage.id,
 
       ///key value pair
       routes: {
