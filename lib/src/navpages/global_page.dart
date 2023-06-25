@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../login.dart';
+import '../../LoggingIn/login.dart';
 
 class GlobalPage extends StatefulWidget {
   const GlobalPage({Key? key}) : super(key: key);
