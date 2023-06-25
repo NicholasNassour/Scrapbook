@@ -1,14 +1,15 @@
-enum BadgeCategory {
-  country,
-  state,
-  city,
-  event,
-}
+// enum BadgeCategory {
+//   country,
+//   state,
+//   city,
+//   event,
+// }
 
 class Badges {
   String? name;
   String? date;
-  BadgeCategory category;
+  String? country;
+  // BadgeCategory category;
 
-  Badges({this.name, this.date, required this.category});
+  Badges({this.name, this.date, this.country});
 }
