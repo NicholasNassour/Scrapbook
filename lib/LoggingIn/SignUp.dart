@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../authentication.dart';
-import '../src/navpages/main_page.dart';
-import '../Profile/users.dart';
 import '../constants.dart';
-import 'verify_email.dart';
+import '../Profile/users.dart';
+import '../src/navpages/main_page.dart';
 
 class Signup extends StatelessWidget {
   const Signup({super.key});
@@ -146,6 +148,7 @@ class _SignupFormState extends State<SignupForm> {
                 width: 376,
                 height: 54,
                 child: TextFormField(
+                  key: const ValueKey('emailField'), // Add key value
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.email_outlined),
                       labelText: 'Email',
@@ -170,6 +173,7 @@ class _SignupFormState extends State<SignupForm> {
                 width: 376,
                 height: 54,
                 child: TextFormField(
+                  key: const ValueKey('passwordField'), // Add key value
                   controller: pass,
                   decoration: InputDecoration(
                     labelText: 'Password',
@@ -204,6 +208,7 @@ class _SignupFormState extends State<SignupForm> {
                 width: 376,
                 height: 54,
                 child: TextFormField(
+                  key: const ValueKey('confirmPasswordField'), // Add key value
                   decoration: InputDecoration(
                     labelText: 'Confirm Password',
                     prefixIcon: const Icon(Icons.lock_outline),
@@ -235,6 +240,7 @@ class _SignupFormState extends State<SignupForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Checkbox(
+                    key: const ValueKey('termsCheckbox'), // Add key value
                     onChanged: (_) {
                       setState(() {
                         agree = !agree;
@@ -259,6 +265,7 @@ class _SignupFormState extends State<SignupForm> {
                   height: 54,
                   width: 376,
                   child: ElevatedButton(
+                    key: const ValueKey('signUpButton'), // Add key value
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
@@ -270,20 +277,15 @@ class _SignupFormState extends State<SignupForm> {
                             //At some point delete the createUser function below so it is instead
                             //called when the user is created rather than explicitly calling it
                             if (auth.currentUser != null) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          const EmailVerificationScreen()));
-                            } else {
+                              // CollectionReference user = FirebaseFirestore
+                              //     .instance
+                              //     .collection('users');
+
                               String uid = AuthenticationHelper().user.uid;
                               Profile newUser =
                                   Profile(uid: uid, name: name!, email: email!);
                               newUser.createUser(uid, name, email);
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MainPage()));
+                              AuthenticationHelper().checkVerification(context);
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
