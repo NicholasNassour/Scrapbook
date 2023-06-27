@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/LoggingIn/SignUp.dart';
-import 'package:flutter_application_1/src/navpages/main_page.dart';
+import '../LoggingIn/SignUp.dart';
+import '../src/navpages/main_page.dart';
+import '../constants.dart';
+import '../authentication.dart';
 import 'dart:core';
-import 'package:flutter_application_1/authentication.dart';
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,18 +96,7 @@ class _LoginFormState extends State<LoginForm> {
   // _onFormSubmit saves data after the app is closed
   _onFormSubmit(String email) async {
     final SharedPreferences prefs = await _prefs;
-    // final int counter = (prefs.getInt('counter') ?? 0) + 1;
-    // final String x = (prefs.getString('KEY_USERNAME') ?? '');
-    // final bool isChecked = (prefs.getBool('Check') ?? false);
     prefs.setBool('Check', true);
-
-    // setState(() {
-    //   _isChecked = isChecked;
-    //   await prefs.setBool('Check', isChecked);
-    //   _counter = prefs.setInt('counter', counter).then((bool success) {
-    //     return counter;
-    //   });
-    // });
   }
 
   _signIn() async {
@@ -114,11 +104,16 @@ class _LoginFormState extends State<LoginForm> {
         .signIn(email: email!, password: password!)
         .then((result) {
       if (result == null) {
-        if (_isChecked) {
-          _onFormSubmit(email!);
+        if (!(auth.currentUser!.emailVerified)) {
+          print("this user ain't verified idk why he's signed in");
+          AuthenticationHelper().checkVerification(context);
+        } else {
+          if (_isChecked) {
+            _onFormSubmit(email!);
+          }
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const MainPage()));
         }
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MainPage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
@@ -134,22 +129,7 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     super.initState();
 
-    // Checking if x/counter values are saved after restarting
-    // _x = _prefs.then((SharedPreferences prefs) {
-    //   return prefs.getString('KEY_USERNAME') ?? '';
-    // });
-
-    // _x.then((String value) {
-    //   print("the email is: $value");
-    // });
-
-    // _counter = _prefs.then((SharedPreferences prefs) {
-    //   return prefs.getInt('counter') ?? 0;
-    // });
-
-    // _counter.then((int value) {
-    //   print("the counter is at: $value");
-    // });
+    //Update  on form submit here
   }
 
   @override
