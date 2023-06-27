@@ -52,7 +52,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       /// check if user is signed (Open Chat page) if user is not signed in (open Login page)
-      initialRoute: auth.currentUser == null ? Login.id : MainPage.id,
+      initialRoute:
+          (auth.currentUser == null || !auth.currentUser!.emailVerified)
+              ? Login.id
+              : MainPage.id,
 
       ///key value pair
       routes: {
