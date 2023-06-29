@@ -55,7 +55,11 @@ they are already signed into. A fix would be to simply sign in a user for the fi
 than when they sign up or log the user out if they fail to verify their account.
 ** Verification bugs and bypasses will be revisted after completing other tasks for now
 
-
+## Creating the badge component when it's been successfully obtained
+1. Properly store the data for a badge in the backend when a new territory is discovered (state, country, continent)
+2. Store the new badge in a data structure (list, hashmap) to be stored in the user's scrapbook
+3. Create a pop up menu for when a new badge is earned
+3.5 Add an animation in the pop up menu of when a badge is earned (optional for now)
 
 Questions??
 - If I have already preset badges (states, countries, continents) how would I
