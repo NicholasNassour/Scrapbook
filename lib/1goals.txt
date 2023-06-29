@@ -1,6 +1,6 @@
 KEY:
 ## Represents the task(s) to be completed
-** Represents the methods to complete the tasks above
+** Represents the methods used to complete the tasks above
 (This is for all code below the horizontal segment)
  
 ## To do later after creating User/Scrapbook/Badges
