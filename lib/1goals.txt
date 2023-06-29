@@ -31,6 +31,29 @@ home page right away.
 1. Created a temporary sign out button in global_page.dart to sign the user out using FirebaseAuth
 2. Added a checkbox in the login page to keep the user signed in if they so chose. If the checkbox was checked,
 the key "Check" in shared_preferences will be used to determine if a a user will stay logged in.
+3. Instead of saving a token, the device can locally store the login info and direct them to the home page
+instead of needing to login again.
+4. Same as above, firebase can easily sign the user out and they will need to manually log back in.
+5. Email verification was easily implemented by creating a method in authentication.dart which is called when a
+user first signs up. The user could bypass the verification if the app was closed without verifying their email
+and then reopened because the account info was stored. Thus, the main page was altered to check if a user existed
+and their account was verified before automatically signing them in.
+5.1. An issue that came up during all of this was deciding when a user's account should be created. If an account
+is never created, some calls such as auth.currentUser!.emailVerified will simply cause an error because the user
+doesn't exist so .emailVerified can't be called. If someone creates an account with someone else's email they won't
+be able to sign in unless the email is verified. Although this is a desired characteristic, the wrong password and 
+name of the user are now stored in the database. One solution would be to create the account for only 10 minutes and 
+delete the account if the email isn't verified in that timeframe but in the long run this could cause people to 
+abuse the system with tons of writes to the database. Another solution would be to keep the account in place but 
+ask the user to reset their password if they tried to login and the account wasn't verified. It would also be
+possible to not create an account and only check if an email and not user has been verified which will require 
+further experimentation to see if that is possible. 
+5.2 Another error that comes with trying to bypass email verification by closing and reopening the app is the user's
+login is still saved locally while connected to firebase. When the user then tries to sign in if their email wasn't
+verified successfully during sign up, there is an error because the user is trying to sign in on an account that
+they are already signed into. A fix would be to simply sign in a user for the first time when they login rather 
+than when they sign up or log the user out if they fail to verify their account.
+** Verification bugs and bypasses will be revisted after completing other tasks for now
 
 
 
