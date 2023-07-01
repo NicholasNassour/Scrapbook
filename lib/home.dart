@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+// import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
@@ -55,8 +55,8 @@ class _HomeState1 extends State<Home1> {
   }
 
   void liveLocation() async {
-    User? curr = auth.currentUser;
-    CollectionReference user = FirebaseFirestore.instance.collection('users');
+    // User? curr = auth.currentUser;
+    // CollectionReference user = FirebaseFirestore.instance.collection('users');
 
     LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.high, distanceFilter: 20);
@@ -68,9 +68,11 @@ class _HomeState1 extends State<Home1> {
       lat = position.latitude.toString();
       long = position.longitude.toString();
 
+      // double currentZoom = googleMapController.cameraPosition.zoom;
+
       CameraPosition newPosition = CameraPosition(
         target: LatLng(double.parse(lat), double.parse(long)),
-        zoom: 16,
+        zoom: 8,
       );
 
       // Animate the camera to the new position
@@ -79,6 +81,7 @@ class _HomeState1 extends State<Home1> {
 
       setState(() {});
     });
+
     // print("here");
     // if (curr != null) {
     //   print("working");
@@ -91,36 +94,36 @@ class _HomeState1 extends State<Home1> {
 
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng sourceLocation = LatLng(37.4221, -122.0841);
-  static const LatLng destination = LatLng(37.4116, -122.0713);
+  // static const LatLng sourceLocation = LatLng(37.4221, -122.0841);
+  // static const LatLng destination = LatLng(37.4116, -122.0713);
 
   List<LatLng> polylineCoordinates = [];
 
-  void getPolyPoints() async {
-    PolylinePoints polylinePoints = PolylinePoints();
+  // void getPolyPoints() async {
+  //   PolylinePoints polylinePoints = PolylinePoints();
 
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      google_api_key,
-      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
-    );
+  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+  //     google_api_key,
+  //     PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+  //     PointLatLng(destination.latitude, destination.longitude),
+  //   );
 
-    if (result.points.isNotEmpty) {
-      for (var point in result.points) {
-        polylineCoordinates.add(
-          LatLng(point.latitude, point.longitude),
-        );
-      }
-      setState(() {});
-    }
-  }
+  //   if (result.points.isNotEmpty) {
+  //     for (var point in result.points) {
+  //       polylineCoordinates.add(
+  //         LatLng(point.latitude, point.longitude),
+  //       );
+  //     }
+  //     setState(() {});
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
     getCurrentLocation();
     liveLocation();
-    getPolyPoints();
+    // getPolyPoints();
   }
 
   @override
@@ -138,42 +141,42 @@ class _HomeState1 extends State<Home1> {
             SizedBox(
               width: width,
               height: height,
-              child: lat != "" && long != ""
-                  ? GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                          target: LatLng(double.parse(lat), double.parse(long)),
-                          zoom: 14.5),
-                      polylines: {
-                        Polyline(
-                          polylineId: const PolylineId("route"),
-                          points: polylineCoordinates,
-                          color: Colors.lightBlue,
-                          width: 5,
-                        ),
-                      },
-                      markers: {
-                        const Marker(
-                          markerId: MarkerId("source"),
-                          position: sourceLocation,
-                        ),
-                        Marker(
-                          markerId: const MarkerId("current"),
-                          position:
-                              LatLng(double.parse(lat), double.parse(long)),
-                        ),
-                        const Marker(
-                          markerId: MarkerId("destination"),
-                          position: destination,
-                        ),
-                      },
-                      onMapCreated: (mapController) {
-                        _controller.complete(mapController);
-                      },
-                    )
-                  : const SizedBox(
-                      width: 10,
-                      height: 10,
-                      child: CircularProgressIndicator()),
+              // child: lat != "" && long != ""
+              //     ? GoogleMap(
+              //         initialCameraPosition: CameraPosition(
+              //             target: LatLng(double.parse(lat), double.parse(long)),
+              //             zoom: 14.5),
+              //         // polylines: {
+              //         //   Polyline(
+              //         //     polylineId: const PolylineId("route"),
+              //         //     points: polylineCoordinates,
+              //         //     color: Colors.lightBlue,
+              //         //     width: 5,
+              //         //   ),
+              //         // },
+              //         markers: {
+              //           //   const Marker(
+              //           //     markerId: MarkerId("source"),
+              //           //     position: sourceLocation,
+              //           //   ),
+              //           Marker(
+              //             markerId: const MarkerId("current"),
+              //             position:
+              //                 LatLng(double.parse(lat), double.parse(long)),
+              //           ),
+              //           //   const Marker(
+              //           //     markerId: MarkerId("destination"),
+              //           //     position: destination,
+              //           //   ),
+              //         },
+              //         onMapCreated: (mapController) {
+              //           _controller.complete(mapController);
+              //         },
+              //       )
+              //     : const SizedBox(
+              //         width: 10,
+              //         height: 10,
+              //         child: CircularProgressIndicator()),
             ),
             const SizedBox(height: 16),
             Text(
