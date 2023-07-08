@@ -19,10 +19,12 @@ class _GlobalPageState extends State<GlobalPage> {
     super.dispose();
   }
 
+  // Method to update the current User's scrapbook name
   Future<void> updateScrapbookName() async {
     // Get current User to extract uid for a scrapbook
     User? user = FirebaseAuth.instance.currentUser;
 
+    // If a current user exists, update the name of the scrapbook for that user
     if (user != null) {
       String userUid = user.uid;
 
@@ -31,13 +33,14 @@ class _GlobalPageState extends State<GlobalPage> {
       CollectionReference Scrapbook =
           FirebaseFirestore.instance.collection('Scrapbook');
 
-      // Updating the name of the scrapbook based on the uid
+      // Updating the name of the scrapbook based on the current user's uid
       Scrapbook.doc(userUid).update({'name': scrapbookName});
     } else {
       print("No user logged in");
     }
   }
 
+  // Sign out method to log out them out from firebase and return them to the login page
   signOut() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     await auth.signOut();
@@ -55,7 +58,6 @@ class _GlobalPageState extends State<GlobalPage> {
         },
         child: Expanded(
           child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

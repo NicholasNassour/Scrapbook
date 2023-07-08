@@ -7,10 +7,12 @@ import 'dart:async';
 import 'constants.dart';
 
 Future<void> main() async {
+  //Ensures the Flutter framework is properly initialized before running the app
   WidgetsFlutterBinding.ensureInitialized();
+  //Initializes the settings for Firebase
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-        apiKey: "AIzaSyBsmTHR7JJry8x0jYgD0u8_xTjeDDiTEX4",
+        apiKey: "Insert_api_key_here",
         authDomain: "scrapbook-4cdbc.firebaseapp.com",
         projectId: "scrapbook-4cdbc",
         storageBucket: "scrapbook-4cdbc.appspot.com",
@@ -22,8 +24,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -32,6 +32,7 @@ class _MyAppState extends State<MyApp> {
   late StreamSubscription<User?> user;
   void initState() {
     super.initState();
+    // Checking to see if a user is signed in successfully
     user = auth.authStateChanges().listen((user) {
       if (user == null) {
         print('User is currently signed out!');
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      /// check if user is signed (Open Chat page) if user is not signed in (open Login page)
+      /// check if user is signed in (open Main page) if user is not signed in (open Login page)
       initialRoute:
           (auth.currentUser == null || !auth.currentUser!.emailVerified)
               ? Login.id

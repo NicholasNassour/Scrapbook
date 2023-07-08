@@ -1,11 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../authentication.dart';
 import '../constants.dart';
 import '../Profile/users.dart';
-import '../src/navpages/main_page.dart';
 
 class Signup extends StatelessWidget {
   const Signup({super.key});
@@ -17,7 +13,7 @@ class Signup extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           const SizedBox(height: 80),
-          // logo
+          // logo (update when polishing app)
           const Column(
             children: [
               FlutterLogo(
@@ -38,7 +34,6 @@ class Signup extends StatelessWidget {
             child: SignupForm(),
           ),
 
-          //Expanded(
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -58,24 +53,7 @@ class Signup extends StatelessWidget {
               )
             ],
           ),
-          //,
         ],
-      ),
-    );
-  }
-
-  Container buildLogo() {
-    return Container(
-      height: 80,
-      width: 80,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue),
-      child: const Center(
-        child: Text(
-          "T",
-          style: TextStyle(color: Colors.white, fontSize: 60.0),
-        ),
       ),
     );
   }
@@ -266,25 +244,25 @@ class _SignupFormState extends State<SignupForm> {
                   width: 376,
                   child: ElevatedButton(
                     key: const ValueKey('signUpButton'), // Add key value
+                    // When the Sign Up button is pressed check if values in the formKey exist
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
+                        //Use Firebase to sign up a user with their given email and password
                         AuthenticationHelper()
                             .signUp(email: email!, password: password!)
                             .then((result) {
                           if (result == null) {
-                            //At some point delete the createUser function below so it is instead
-                            //called when the user is created rather than explicitly calling it
                             if (auth.currentUser != null) {
-                              // CollectionReference user = FirebaseFirestore
-                              //     .instance
-                              //     .collection('users');
-
+                              //If there are no errors and the user isn't null, create a profile
+                              //with their uid, name, and email
                               String uid = AuthenticationHelper().user.uid;
                               Profile newUser =
                                   Profile(uid: uid, name: name!, email: email!);
                               newUser.createUser(uid, name, email);
+
+                              //
                               AuthenticationHelper().checkVerification(context);
                             }
                           } else {

@@ -7,13 +7,6 @@ import 'dart:core';
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
-//Create more messages when an email is not found/password is incorrect etc
-
-//When a successful login is stored, store the user and pass using the
-//flutter secture storage and create a method which will automatically
-//input the info again when the app is opened using through initstate
-
-//Create a goal page in mind to stop getting sidetracked on different projects
 class Login extends StatelessWidget {
   static String id = '1';
   const Login({super.key});
@@ -28,8 +21,10 @@ class Login extends StatelessWidget {
           // logo
           Column(
             children: [
-              Image.asset('assets/images/scrapbook.png',
-                  height: 200, width: 200),
+              Image.asset(
+                  'assets/images/scrapbook.png', //Set the header image as the logo
+                  height: 200,
+                  width: 200),
               const SizedBox(height: 50),
               const Text(
                 'Welcome back!',
@@ -49,6 +44,7 @@ class Login extends StatelessWidget {
 
           const SizedBox(height: 20),
 
+          // Footer information
           Row(
             children: <Widget>[
               const SizedBox(width: 30),
@@ -85,20 +81,20 @@ class _LoginFormState extends State<LoginForm> {
   final storage = const FlutterSecureStorage();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  // Stores email and password when logging in
   String? email;
   String? password;
-  // late Future<String> _x;
-  // late Future<int> _counter;
 
   bool _obscureText = true;
   bool _isChecked = false;
 
-  // _onFormSubmit saves data after the app is closed
+  // Checks if the "Stay Signed in?" button is pressed
   _onFormSubmit(String email) async {
     final SharedPreferences prefs = await _prefs;
     prefs.setBool('Check', true);
   }
 
+  //S
   _signIn() async {
     AuthenticationHelper()
         .signIn(email: email!, password: password!)
@@ -128,8 +124,6 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-
-    //Update  on form submit here
   }
 
   @override
@@ -144,7 +138,6 @@ class _LoginFormState extends State<LoginForm> {
             width: 376,
             height: 54,
             child: TextFormField(
-              // initialValue: 'Input text',
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.email_outlined),
                 labelText: 'Email',
@@ -174,7 +167,6 @@ class _LoginFormState extends State<LoginForm> {
             width: 376,
             height: 54,
             child: TextFormField(
-              // initialValue: 'Input text',
               decoration: InputDecoration(
                 labelText: 'Password',
                 prefixIcon: const Icon(Icons.lock_outline),
@@ -235,6 +227,7 @@ class _LoginFormState extends State<LoginForm> {
             height: 54,
             width: 184,
             child: ElevatedButton(
+              // Check if email and password buttons are validated then sign in
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();

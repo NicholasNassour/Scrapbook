@@ -8,7 +8,6 @@ class Profile {
 
   Profile({required this.uid, required this.name, required this.email});
 
-  // Creating a user profile with a unique UID linked to their email
   void createUser(String? uid, String? name, String? email) {
     // Get a reference to the Firestore collection
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -27,6 +26,7 @@ class Profile {
       // Handle the error appropriately, such as showing an error message to the user
     });
 
+    // Creating a user profile with a unique UID linked to their email
     Book userBook = Book(userUid: uid!);
     userBook.createScrapbook(uid);
   }

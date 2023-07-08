@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-import 'constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Home1 extends StatefulWidget {
   static String id = '2';
@@ -14,14 +10,14 @@ class Home1 extends StatefulWidget {
   _HomeState1 createState() => _HomeState1();
 }
 
-// If creating lat and long as outside variables can be an issue
-// Use sharedprefences to keep the data stored
-
+//Latitude and longitude values
 String lat = "0";
 String long = "0";
 
 class _HomeState1 extends State<Home1> {
+  //Get current location of a user
   Future<void> getCurrentLocation() async {
+    //Permission variables to enable location tracking
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -54,84 +50,55 @@ class _HomeState1 extends State<Home1> {
     });
   }
 
+  //Get a user's current location
   void liveLocation() async {
-    // User? curr = auth.currentUser;
-    // CollectionReference user = FirebaseFirestore.instance.collection('users');
-
+    // Configure location settings for high accuracy and a distance filter of 20 meters
     LocationSettings locationSettings = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 20);
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 20,
+    );
 
+    // Wait for the Google Map controller to be available
     GoogleMapController googleMapController = await _controller.future;
 
+    // Start listening to the position stream provided by Geolocator
     Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen((Position position) {
+      // Retrieve latitude and longitude from the received position
       lat = position.latitude.toString();
       long = position.longitude.toString();
 
-      // double currentZoom = googleMapController.cameraPosition.zoom;
-
+      // Create a new camera position based on the updated latitude and longitude
       CameraPosition newPosition = CameraPosition(
         target: LatLng(double.parse(lat), double.parse(long)),
         zoom: 8,
       );
 
-      // Animate the camera to the new position
+      // Animate the camera to the new latitude and longitude of the user
       googleMapController
           .animateCamera(CameraUpdate.newCameraPosition(newPosition));
 
+      // Update the UI to reflect the new location
       setState(() {});
     });
-
-    // print("here");
-    // if (curr != null) {
-    //   print("working");
-    //   user.doc(curr.uid).update({
-    //     'prevLocations': FieldValue.arrayUnion([(lat, long)])
-    //   });
-    // }
-    // print("didn't crash");
   }
 
   final Completer<GoogleMapController> _controller = Completer();
-
-  // static const LatLng sourceLocation = LatLng(37.4221, -122.0841);
-  // static const LatLng destination = LatLng(37.4116, -122.0713);
-
-  List<LatLng> polylineCoordinates = [];
-
-  // void getPolyPoints() async {
-  //   PolylinePoints polylinePoints = PolylinePoints();
-
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     google_api_key,
-  //     PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-  //     PointLatLng(destination.latitude, destination.longitude),
-  //   );
-
-  //   if (result.points.isNotEmpty) {
-  //     for (var point in result.points) {
-  //       polylineCoordinates.add(
-  //         LatLng(point.latitude, point.longitude),
-  //       );
-  //     }
-  //     setState(() {});
-  //   }
-  // }
 
   @override
   void initState() {
     super.initState();
     getCurrentLocation();
     liveLocation();
-    // getPolyPoints();
   }
 
   @override
   @override
   Widget build(BuildContext context) {
+    //Calculating height and width for a given device
     final screenSize = MediaQuery.of(context).size;
     final width = screenSize.width * 0.98;
-    final height = screenSize.height * .25;
+    final height = screenSize.height * 0.25;
 
     return Scaffold(
       body: Center(
@@ -141,42 +108,28 @@ class _HomeState1 extends State<Home1> {
             SizedBox(
               width: width,
               height: height,
-              // child: lat != "" && long != ""
-              //     ? GoogleMap(
-              //         initialCameraPosition: CameraPosition(
-              //             target: LatLng(double.parse(lat), double.parse(long)),
-              //             zoom: 14.5),
-              //         // polylines: {
-              //         //   Polyline(
-              //         //     polylineId: const PolylineId("route"),
-              //         //     points: polylineCoordinates,
-              //         //     color: Colors.lightBlue,
-              //         //     width: 5,
-              //         //   ),
-              //         // },
-              //         markers: {
-              //           //   const Marker(
-              //           //     markerId: MarkerId("source"),
-              //           //     position: sourceLocation,
-              //           //   ),
-              //           Marker(
-              //             markerId: const MarkerId("current"),
-              //             position:
-              //                 LatLng(double.parse(lat), double.parse(long)),
-              //           ),
-              //           //   const Marker(
-              //           //     markerId: MarkerId("destination"),
-              //           //     position: destination,
-              //           //   ),
-              //         },
-              //         onMapCreated: (mapController) {
-              //           _controller.complete(mapController);
-              //         },
-              //       )
-              //     : const SizedBox(
-              //         width: 10,
-              //         height: 10,
-              //         child: CircularProgressIndicator()),
+              child: lat != "" && long != ""
+                  //Creates a Google Map Widget with the users initial camera position
+                  ? GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                          target: LatLng(double.parse(lat), double.parse(long)),
+                          zoom: 14.5),
+                      markers: {
+                        Marker(
+                          markerId: const MarkerId("current"),
+                          position:
+                              LatLng(double.parse(lat), double.parse(long)),
+                        ),
+                      },
+                      onMapCreated: (mapController) {
+                        _controller.complete(mapController);
+                      },
+                    )
+                  // If the map doesn't load replace with a loading indicator
+                  : const SizedBox(
+                      width: 10,
+                      height: 10,
+                      child: CircularProgressIndicator()),
             ),
             const SizedBox(height: 16),
             Text(

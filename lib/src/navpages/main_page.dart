@@ -18,15 +18,16 @@ class _MainPageState extends State<MainPage> {
     const GlobalPage(),
     ProfilePage(),
   ];
+  //current page index, home = 0, scrapbook = 1, global = 2, profile = 3
   int currentIndex = 0;
 
+  //Switch the index to a different page when an icon is pressed
   void onTap(int index) {
     setState(() {
       currentIndex = index;
     });
   }
 
-//hide text in navigation bar, keep icons still when changing index
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: const Text("Scrapbook"),
       ),
+      //Navigation bar of the main page
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: onTap,
