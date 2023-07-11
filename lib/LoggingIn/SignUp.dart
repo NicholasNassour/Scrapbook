@@ -33,7 +33,7 @@ class Signup extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: SignupForm(),
           ),
-
+          //Foo
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -83,7 +83,7 @@ class _SignupFormState extends State<SignupForm> {
   Widget build(BuildContext context) {
     var border = const OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(100.0),
+        Radius.circular(10),
       ),
     );
 
@@ -262,7 +262,8 @@ class _SignupFormState extends State<SignupForm> {
                                   Profile(uid: uid, name: name!, email: email!);
                               newUser.createUser(uid, name, email);
 
-                              //
+                              //Sends a verification link to the email provided
+                              //See authentication.dart for more
                               AuthenticationHelper().checkVerification(context);
                             }
                           } else {
