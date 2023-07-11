@@ -85,6 +85,11 @@ flutter:
   assets:
     - assets/firebase_token.json
     - assets/images/scrapbook.png
+    - assets/images/badges/1.png
+    - assets/images/badges/2.png
+    - assets/images/badges/3.png
+    - assets/images/badges/4.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
