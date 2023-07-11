@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class Book {
   String userUid;
   String? name;
-  Map badges;
+  List<Badge> badges;
 
-  Book({required this.userUid, this.name, this.badges = const {}});
+  Book({required this.userUid, this.name, this.badges = const []});
 
   // Creating a Scrapbook linked to the users UID
   void createScrapbook(String userUid) {
@@ -17,8 +18,9 @@ class Book {
 
     // Create a new scrapbook with an empty name until the user sets the name
     scrapbookDocRef.set({
+      'uid': userUid,
       'name': '',
-      'badges': {},
+      'countries': badges,
     }).then((_) {
       print('Scrapbook created with ID: $userUid');
       // You can perform further actions here, such as navigation or showing a success message

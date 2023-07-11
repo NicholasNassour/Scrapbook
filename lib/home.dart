@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'authentication.dart';
+import 'constants.dart';
 
 class Home1 extends StatefulWidget {
   static String id = '2';
@@ -50,6 +54,82 @@ class _HomeState1 extends State<Home1> {
     });
   }
 
+  //Displays a dialog alerting the user of a new badge they collected
+  void newUnlock(BuildContext context, String country) {
+    String? flag = countryFlagMap[country];
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title:
+              const Text('New Badge Unlocked! ', textAlign: TextAlign.center),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              //Display the badge of the country that was visited, if a badge exists
+              if (flag != null)
+                Image.asset(
+                  flag,
+                  width: 50, // Adjust the width to your preference
+                  height: 50, // Adjust the height to your preference
+                )
+              else
+                const CircularProgressIndicator(), // Loading symbol
+              const SizedBox(height: 16),
+              Text('You\'ve unlocked: $country'),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  //Check if a Country has been visited and add to badge list if new
+  visitedCountry() async {
+    String uid = AuthenticationHelper().user.uid;
+
+    //Reference the collection 'Scrapbook' in Firebase for a given uid
+    CollectionReference scrapbookCollection =
+        FirebaseFirestore.instance.collection('Scrapbook');
+    DocumentReference scrapbookDocRef = scrapbookCollection.doc(uid);
+
+    //Extract the address from the given lat/long values
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+      double.parse(lat),
+      double.parse(long),
+    );
+
+    //Retrieve the current country the user is located in
+    String country = placemarks.first.country ?? '';
+
+    //Take a snapshot of the users scrapbook from Firebase
+    scrapbookDocRef.get().then((DocumentSnapshot snapshot) {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+        List<dynamic> badges = data['badges'] ?? [];
+
+        //Check if a badge has been collected for a country already
+        if (!badges.contains(country)) {
+          // Add country to the badges list
+          badges.add(country);
+          // Update the badges array in the scrapbook document
+          scrapbookDocRef.update({'badges': badges}).then((_) {
+            newUnlock(context, country);
+          }).catchError((error) {
+            print('Failed to add badge to the scrapbook: $error');
+          });
+        } else {
+          print('Badge already exists in the scrapbook');
+        }
+      } else {
+        print('Scrapbook not found for user with UID: $uid');
+      }
+    }).catchError((error) {
+      print('Failed to fetch scrapbook: $error');
+    });
+  }
+
   //Get a user's current location
   void liveLocation() async {
     // Configure location settings for high accuracy and a distance filter of 20 meters
@@ -77,6 +157,8 @@ class _HomeState1 extends State<Home1> {
       // Animate the camera to the new latitude and longitude of the user
       googleMapController
           .animateCamera(CameraUpdate.newCameraPosition(newPosition));
+
+      visitedCountry();
 
       // Update the UI to reflect the new location
       setState(() {});
@@ -113,7 +195,7 @@ class _HomeState1 extends State<Home1> {
                   ? GoogleMap(
                       initialCameraPosition: CameraPosition(
                           target: LatLng(double.parse(lat), double.parse(long)),
-                          zoom: 14.5),
+                          zoom: 8),
                       markers: {
                         Marker(
                           markerId: const MarkerId("current"),

@@ -17,7 +17,7 @@ class Profile {
       'uid': uid,
       'name': name,
       'email': email,
-      'prevLocations': [],
+      'countries': [],
     }).then((DocumentReference documentRef) {
       print('User created with ID: ${documentRef.id}');
       // You can perform further actions here, such as navigation or showing a success message
