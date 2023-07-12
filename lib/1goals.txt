@@ -61,6 +61,23 @@ than when they sign up or log the user out if they fail to verify their account.
 3. Create a pop up menu for when a new badge is earned
 3.5 Add an animation in the pop up menu of when a badge is earned (optional for now)
 
+** Creating the badge component when it's been successfully obtained
+1-2. For now, when a user explores a new country the country they visited is stored in an array
+called 'countries' in the scrapbook object. Everytime a new location is noted it checks the
+array to see if a country has been visited, and if it hasn't, it awards the user with a badge.
+Need to change the String array to be an array of badges that were obtained rather than just 
+the country to make it easier to use the Badge object when going through the badge collection.
+3. The pop up menu is simply an alert dialog which tells the user congrats on unlocking a new
+badge and displays the flag of the country they visited
+
+Bugs discovered and notes regarding them:
+1. Whenever the location is changed while not working with the main page an error is thrown.
+When the google maps object was commented out, this error did not occur so maybe it happens
+because of a loading issue while the map is not shown.
+2. Countries like Palestine and Vatican City cause an error when discovered because they have
+no address to parse through in the current packages. Possibly add a range of lat/long values
+to search for?
+
 Questions??
 - If I have already preset badges (states, countries, continents) how would I
 add it to a user's profile when it has been obtained? Do I create all the preset
