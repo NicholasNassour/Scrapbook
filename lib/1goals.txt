@@ -78,6 +78,13 @@ because of a loading issue while the map is not shown.
 no address to parse through in the current packages. Possibly add a range of lat/long values
 to search for?
 
+## Create new badges that appear in the Scrapbook page that act as albums for specific photos
+1. Whenever a new badge is obtained, the badge should show up in the Scrapbook and when clicked
+it will either take the user to a new page or bring a pop up which shows the pictures that
+are stored.
+2. Add an option to arrange the badges either by the data they were obtained or alphabetical
+order.
+
 Questions??
 - If I have already preset badges (states, countries, continents) how would I
 add it to a user's profile when it has been obtained? Do I create all the preset
