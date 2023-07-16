@@ -207,7 +207,7 @@ class _SignupFormState extends State<SignupForm> {
                   obscureText: !_obscureconfirm,
                   validator: (value) {
                     if (value != pass.text) {
-                      return 'password not match';
+                      return 'passwords do not match';
                     }
                     return null;
                   },
