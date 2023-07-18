@@ -58,6 +58,7 @@ class _HomeState1 extends State<Home1> {
   void newUnlock(BuildContext context, String country) {
     String? flag = countryFlagMap[country];
 
+    //Alert dialog pop up for when a badge is unlocked
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -89,31 +90,32 @@ class _HomeState1 extends State<Home1> {
   visitedCountry() async {
     String uid = AuthenticationHelper().user.uid;
 
-    //Reference the collection 'Scrapbook' in Firebase for a given uid
+    // Reference the collection 'Scrapbook' in Firebase for a given uid
     CollectionReference scrapbookCollection =
         FirebaseFirestore.instance.collection('Scrapbook');
     DocumentReference scrapbookDocRef = scrapbookCollection.doc(uid);
 
-    //Extract the address from the given lat/long values
+    // Extract the address from the given lat/long values
     List<Placemark> placemarks = await placemarkFromCoordinates(
       double.parse(lat),
       double.parse(long),
     );
 
-    //Retrieve the current country the user is located in
+    // Retrieve the current country the user is located in
     String country = placemarks.first.country ?? '';
 
-    //Take a snapshot of the users scrapbook from Firebase
+    // Take a snapshot of the user's scrapbook from Firebase
     scrapbookDocRef.get().then((DocumentSnapshot snapshot) {
       if (snapshot.exists) {
         Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
         List<dynamic> badges = data['badges'] ?? [];
 
-        //Check if a badge has been collected for a country already
+        // Check if a badge has been collected for the country already
         if (!badges.contains(country)) {
           // Add country to the badges list
           badges.add(country);
-          // Update the badges array in the scrapbook document
+
+          // Update the badges and countries in the scrapbook document
           scrapbookDocRef.update({'badges': badges}).then((_) {
             newUnlock(context, country);
           }).catchError((error) {
