@@ -85,11 +85,18 @@ are stored.
 2. Add an option to arrange the badges either by the data they were obtained or alphabetical
 order.
 
-Questions??
-- If I have already preset badges (states, countries, continents) how would I
-add it to a user's profile when it has been obtained? Do I create all the preset
-badges and then set its boolean value to true when it's unlocked or do I wait until 
-a badge is unlocked to create the badge object?
-- What are same ways to add error handling when the app crashes? Should there be an
-option which just refreshes the entire app or should the app just close on its own?
-- 
+** Create new badges that appear in the Scrapbook page that act as albums for specific photos
+1. When a new country is unlocked, it is stored in an array of strings in the user's scrapbook
+that is periodically checked when the user's location changes or the badge collection page is
+opened. After a new badge for a country is unlocked, the badge appears in the badge collection
+page and can be clicked to take them to a photo album. There is then a plus (+) symbol which
+allows the user to add pictures from their device which is stored in Firebase Storage with
+each album following the same path structure users/user_uid/badge_name. When an album is opened
+the url for that badge is then obtained to load all of the photos that a user previously added.
+Some future tips would be to allow users to mass select photos they want to add rather than 
+only being able to add one photo at a time and load the images faster/find a way to reduce
+data usage when opening a photo album.
+2. A feature at the top right of the badge list allows users to arrange their badges in either
+alphabetical or in the order they were obtained. The way this feature was implemented it
+created an extra app bar below the original one which should be changed to add the feature
+to the existing app bar.
