@@ -14,14 +14,15 @@ class Signup extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 80),
           // logo (update when polishing app)
-          const Column(
+          Column(
             children: [
-              FlutterLogo(
-                size: 55,
-              ),
+              Image.asset(
+                  'assets/images/scrapbook.png', //Set the header image as the logo
+                  height: 150,
+                  width: 150),
             ],
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 10),
           const Center(
             child: Text(
               'Welcome!',
@@ -87,13 +88,10 @@ class _SignupFormState extends State<SignupForm> {
       ),
     );
 
-    var space = const SizedBox(height: 10);
+    var space = const SizedBox(height: 12);
     return Container(
         // height:300,
         width: 700,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(width: 1)),
         child: Form(
           key: _formKey,
           child: Column(
@@ -121,8 +119,11 @@ class _SignupFormState extends State<SignupForm> {
                   },
                 ),
               ),
+
+              space,
+
               Container(
-                margin: const EdgeInsets.only(top: 10),
+                // margin: const EdgeInsets.only(top: 10),
                 width: 376,
                 height: 54,
                 child: TextFormField(
@@ -214,27 +215,25 @@ class _SignupFormState extends State<SignupForm> {
                 ),
               ),
               // name
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Checkbox(
-                    key: const ValueKey('termsCheckbox'), // Add key value
-                    onChanged: (_) {
-                      setState(() {
-                        agree = !agree;
-                      });
-                    },
-                    value: agree,
-                  ),
-                  const Flexible(
-                    child: Text(
-                        'By creating an account, I agree to Terms & Conditions and Privacy Policy.'),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     Checkbox(
+              //       key: const ValueKey('termsCheckbox'), // Add key value
+              //       onChanged: (_) {
+              //         setState(() {
+              //           agree = !agree;
+              //         });
+              //       },
+              //       value: agree,
+              //     ),
+              //     const Flexible(
+              //       child: Text(
+              //           'By creating an account, I agree to Terms & Conditions and Privacy Policy.'),
+              //     ),
+              //   ],
+              // ),
+              space,
 
               // signUP button
               Container(
